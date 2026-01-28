@@ -1,0 +1,191 @@
+[gd_scene load_steps=11 format=3 uid="uid://cdy668x4myhii"]
+
+[ext_resource type="PackedScene" uid="uid://dxijlkmntkckj" path="res://Prefabs/Interaction/BaseOpenableObject.tscn" id="1_kmovt"]
+[ext_resource type="PackedScene" uid="uid://dg1uje1j7uw50" path="res://Prefabs/door.tscn" id="2_2nrl0"]
+[ext_resource type="AudioStream" uid="uid://5h82b6hecrus" path="res://Assets/Audio/DoubleDoor/double_door_opening-2.ogg" id="3_2nrl0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ancog"]
+size = Vector3(0.6932373, 2.25, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8bhbu"]
+size = Vector3(0.7104492, 2.25, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8rf7l"]
+size = Vector3(0.68847656, 2.1236572, 0.1)
+
+[sub_resource type="Animation" id="Animation_2nrl0"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Object/DoorPart 1")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.35, 0, 0)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Object/DoorPart 2")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, -0.35, 0, 0)
+tracks/2/type = "position_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("OpenArea/CollisionShape3D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(-0.033333335, 1, 0.35, 0, 0)
+tracks/3/type = "position_3d"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("OpenArea/CollisionShape3D2")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, -0.35, 0, 0)
+tracks/4/type = "position_3d"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CollisionShape3D")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, 0.35, 0, 0)
+tracks/5/type = "position_3d"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CollisionShape3D2")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = PackedFloat32Array(0, 1, -0.35, 0, 0)
+
+[sub_resource type="Animation" id="Animation_ancog"]
+resource_name = "close"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Object/DoorPart 1")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 1, 0, 0, 1, 1, 0.35, 0, 0)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Object/DoorPart 2")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, -1, 0, 0, 1, 1, -0.35, 0, 0)
+tracks/2/type = "position_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("OpenArea/CollisionShape3D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 1, 0, 0, 1, 1, 0.35, 0, 0)
+tracks/3/type = "position_3d"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("OpenArea/CollisionShape3D2")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, -1, 0, 0, 1, 1, -0.35, 0, 0)
+tracks/4/type = "position_3d"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CollisionShape3D")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, 1, 0, 0, 1, 1, 0.35, 0, 0)
+tracks/5/type = "position_3d"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CollisionShape3D2")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = PackedFloat32Array(0, 1, -1, 0, 0, 1, 1, -0.35, 0, 0)
+
+[sub_resource type="Animation" id="Animation_kmovt"]
+resource_name = "open"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Object/DoorPart 1")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0.033333335, 1, 0.35, 0, 0, 1, 1, 1, 0, 0)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Object/DoorPart 2")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, -0.35, 0, 0, 1, 1, -1, 0, 0)
+tracks/2/type = "position_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("OpenArea/CollisionShape3D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0.35, 0, 0, 1, 1, 1, 0, 0)
+tracks/3/type = "position_3d"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("OpenArea/CollisionShape3D2")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, -0.35, 0, 0, 1, 1, -1, 0, 0)
+tracks/4/type = "position_3d"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CollisionShape3D")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, 0.35, 0, 0, 1, 1, 1, 0, 0)
+tracks/5/type = "position_3d"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CollisionShape3D2")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = PackedFloat32Array(0, 1, -0.35, 0, 0, 1, 1, -1, 0, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ancog"]
+_data = {
+&"RESET": SubResource("Animation_2nrl0"),
+&"close": SubResource("Animation_ancog"),
+&"open": SubResource("Animation_kmovt")
+}
+
+[node name="SlidingDoor" instance=ExtResource("1_kmovt")]
+
+[node name="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0, 0)
+shape = SubResource("BoxShape3D_ancog")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, 0, 0)
+shape = SubResource("BoxShape3D_8bhbu")
+
+[node name="Object" parent="." index="2"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="DoorPart 1" parent="Object" index="0" instance=ExtResource("2_2nrl0")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0, 0)
+
+[node name="DoorPart 2" parent="Object" index="1" instance=ExtResource("2_2nrl0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, 0, 0)
+
+[node name="OpenSound" parent="." index="3"]
+stream = ExtResource("3_2nrl0")
+
+[node name="CollisionShape3D" parent="OpenArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0, 0)
+shape = SubResource("BoxShape3D_8rf7l")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="OpenArea" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, 0, 0)
+shape = SubResource("BoxShape3D_8rf7l")
+
+[node name="AnimationPlayer" parent="." index="5"]
+libraries = {
+&"": SubResource("AnimationLibrary_ancog")
+}

@@ -1,0 +1,156 @@
+[gd_scene load_steps=6 format=3 uid="uid://dj5kb8t53lgci"]
+
+[ext_resource type="Script" uid="uid://c14gdx04ii52t" path="res://InventorySystem/Scripts/InventoryUI.gd" id="1_sygmq"]
+[ext_resource type="PackedScene" uid="uid://cr1bf8xokqovj" path="res://InventorySystem/Scenes/InventorySlot.tscn" id="2_vx0su"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_h01i6"]
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_fjy54"]
+font_size = 60
+
+[sub_resource type="LabelSettings" id="LabelSettings_qhuno"]
+font_size = 18
+
+[node name="Inventory_UI" type="Control" node_paths=PackedStringArray("slots_container")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sygmq")
+slot_scene = ExtResource("2_vx0su")
+slots_container = NodePath("Panel/MarginContainer/VBoxContainer/Content/SlotsContainer")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="Panel/MarginContainer/VBoxContainer/Header"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 1
+text = "INVENTORY"
+label_settings = SubResource("LabelSettings_h01i6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CloseButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/Header"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "X"
+
+[node name="Content" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SlotsContainer" type="GridContainer" parent="Panel/MarginContainer/VBoxContainer/Content"]
+layout_mode = 2
+size_flags_vertical = 0
+columns = 5
+
+[node name="InventorySlot" parent="Panel/MarginContainer/VBoxContainer/Content/SlotsContainer" instance=ExtResource("2_vx0su")]
+layout_mode = 2
+
+[node name="InventorySlot2" parent="Panel/MarginContainer/VBoxContainer/Content/SlotsContainer" instance=ExtResource("2_vx0su")]
+layout_mode = 2
+slot_index = 1
+
+[node name="InventorySlot3" parent="Panel/MarginContainer/VBoxContainer/Content/SlotsContainer" instance=ExtResource("2_vx0su")]
+layout_mode = 2
+slot_index = 2
+
+[node name="InventorySlot4" parent="Panel/MarginContainer/VBoxContainer/Content/SlotsContainer" instance=ExtResource("2_vx0su")]
+layout_mode = 2
+slot_index = 3
+
+[node name="InventorySlot5" parent="Panel/MarginContainer/VBoxContainer/Content/SlotsContainer" instance=ExtResource("2_vx0su")]
+layout_mode = 2
+slot_index = 4
+
+[node name="ItemDisplay" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="ItemName" type="Label" parent="Panel/MarginContainer/VBoxContainer/Content/ItemDisplay"]
+layout_mode = 2
+text = "Name Placeholder"
+label_settings = SubResource("LabelSettings_fjy54")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemDescription" type="Label" parent="Panel/MarginContainer/VBoxContainer/Content/ItemDisplay"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+label_settings = SubResource("LabelSettings_qhuno")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="DropButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/Content/ItemDisplay"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Drop"
+
+[node name="EquipButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/Content/ItemDisplay"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Equip"
+
+[node name="UseButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/Content/ItemDisplay"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "USE"
+
+[node name="ItemViewportContainer" type="SubViewportContainer" parent="Panel"]
+visible = false
+layout_mode = 0
+offset_left = 104.0
+offset_top = 283.0
+offset_right = 424.0
+offset_bottom = 603.0
+
+[node name="InventoryItemViewport" type="SubViewport" parent="Panel/ItemViewportContainer"]
+unique_name_in_owner = true
+handle_input_locally = false
+size = Vector2i(320, 320)
+render_target_update_mode = 0
+
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/Header/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/Content/ItemDisplay/DropButton" to="." method="_on_drop_button_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/Content/ItemDisplay/EquipButton" to="." method="_on_equip_button_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/Content/ItemDisplay/UseButton" to="." method="_on_use_button_pressed"]

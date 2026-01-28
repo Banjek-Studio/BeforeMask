@@ -1,0 +1,82 @@
+[gd_scene load_steps=7 format=3 uid="uid://dblf48xvncctq"]
+
+[ext_resource type="Script" uid="uid://c6kdcyjwdpckp" path="res://Scripts/Interaction/Openable.gd" id="1_g5pxp"]
+[ext_resource type="PackedScene" uid="uid://dg1uje1j7uw50" path="res://Prefabs/door.tscn" id="2_864q5"]
+
+[sub_resource type="Animation" id="Animation_jwt1k"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DoorPart 1")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.5, 0, 0)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DoorPart 2")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, -0.5, 0, 0)
+
+[sub_resource type="Animation" id="Animation_864q5"]
+resource_name = "close"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DoorPart 1")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 1.4, 0, 0, 1, 1, 0.5, 0, 0)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DoorPart 2")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, -1.4, 0, 0, 1, 1, -0.5, 0, 0)
+
+[sub_resource type="Animation" id="Animation_g5pxp"]
+resource_name = "open"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DoorPart 1")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.5, 0, 0, 1, 1, 1.4, 0, 0)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DoorPart 2")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, -0.5, 0, 0, 1, 1, -1.4, 0, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tlx26"]
+_data = {
+&"RESET": SubResource("Animation_jwt1k"),
+&"close": SubResource("Animation_864q5"),
+&"open": SubResource("Animation_g5pxp")
+}
+
+[node name="SlidingDoor" type="Node3D" node_paths=PackedStringArray("anim_player_override")]
+script = ExtResource("1_g5pxp")
+anim_player_override = NodePath("AnimationPlayer")
+metadata/_edit_group_ = true
+
+[node name="DoorPart 1" parent="." groups=["Interactable"] instance=ExtResource("2_864q5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0)
+operation = 0
+collision_layer = 5
+
+[node name="DoorPart 2" parent="." groups=["Interactable"] instance=ExtResource("2_864q5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0)
+operation = 0
+collision_layer = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_tlx26")
+}

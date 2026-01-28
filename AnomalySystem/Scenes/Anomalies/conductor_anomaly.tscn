@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://dwd4efxn5ko76"]
+
+[ext_resource type="PackedScene" uid="uid://ccpefst1jhtxy" path="res://AnomalySystem/Scenes/base_anomaly_object.tscn" id="1_jn3vh"]
+[ext_resource type="Script" uid="uid://w2wytmu7bo80" path="res://AnomalySystem/Scripts/Anomalies/ConductorAnomaly.gd" id="2_ak1gf"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ak1gf"]
+radius = 0.3
+height = 1.8
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_45qa0"]
+radius = 0.3
+height = 1.8
+
+[node name="ConductorAnomaly" node_paths=PackedStringArray("collision_area") instance=ExtResource("1_jn3vh")]
+script = ExtResource("2_ak1gf")
+collision_area = NodePath("Area3D")
+type = 9
+
+[node name="Area3D" type="Area3D" parent="." index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
+shape = SubResource("CapsuleShape3D_ak1gf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D" index="1"]
+mesh = SubResource("CapsuleMesh_45qa0")
+skeleton = NodePath("../..")

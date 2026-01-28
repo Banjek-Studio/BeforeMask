@@ -1,0 +1,26 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://ccbixvvm1ieux"]
+
+[ext_resource type="Texture2D" uid="uid://b26cbihabhhvp" path="res://Assets/Materials/Wagon/Floor/SurfaceImperfections014_2K-PNG_Displacement.png" id="1_oqv1c"]
+[ext_resource type="Texture2D" uid="uid://chc87jgdmpaf5" path="res://Assets/Materials/Wagon/Floor/SurfaceImperfections014_2K-PNG_Opacity.png" id="2_s7wnf"]
+[ext_resource type="Texture2D" uid="uid://bh2vq1pdbq7db" path="res://Assets/Materials/Wagon/Floor/SurfaceImperfections014_2K-PNG_NormalGL.png" id="3_7vch3"]
+[ext_resource type="Texture2D" uid="uid://p6klvkgxyem8" path="res://Assets/Materials/Wagon/Floor/SurfaceImperfections014_2K-PNG_Roughness.png" id="4_f6igg"]
+
+[resource]
+albedo_color = Color(0.74558026, 0.7455802, 0.7455802, 1)
+albedo_texture = ExtResource("1_oqv1c")
+albedo_texture_force_srgb = true
+metallic = 1.0
+metallic_texture = ExtResource("1_oqv1c")
+roughness_texture = ExtResource("4_f6igg")
+emission_enabled = true
+normal_enabled = true
+normal_texture = ExtResource("3_7vch3")
+ao_enabled = true
+ao_texture = ExtResource("2_s7wnf")
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+uv1_scale = Vector3(0.245, 0.245, 0.245)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 8.161403
+uv1_world_triplanar = true

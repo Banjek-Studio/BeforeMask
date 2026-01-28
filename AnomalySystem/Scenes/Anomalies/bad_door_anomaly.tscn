@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://j5ap12qv2r3s"]
+
+[ext_resource type="PackedScene" uid="uid://ccpefst1jhtxy" path="res://AnomalySystem/Scenes/base_anomaly_object.tscn" id="1_ermx1"]
+[ext_resource type="Script" uid="uid://ckbbx28q11pjs" path="res://AnomalySystem/Scripts/Anomalies/BadDoorsAnomaly.gd" id="2_f7nk5"]
+
+[node name="BadDoorAnomaly" instance=ExtResource("1_ermx1")]
+script = ExtResource("2_f7nk5")
+type = 7

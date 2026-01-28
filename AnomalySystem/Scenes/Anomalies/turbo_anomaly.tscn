@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1o2akep1m15r"]
+
+[ext_resource type="PackedScene" uid="uid://ccpefst1jhtxy" path="res://AnomalySystem/Scenes/base_anomaly_object.tscn" id="1_cxaax"]
+[ext_resource type="Script" uid="uid://k1v5a3v3nu2i" path="res://AnomalySystem/Scripts/Anomalies/TurboAnomaly.gd" id="2_v0gvv"]
+
+[node name="TurboAnomaly" instance=ExtResource("1_cxaax")]
+script = ExtResource("2_v0gvv")
+required_speed = 4.0
+pushback_force = 50.0
+type = 6

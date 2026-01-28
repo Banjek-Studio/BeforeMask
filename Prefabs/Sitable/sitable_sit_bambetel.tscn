@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://k5j1vu4qyn43"]
+
+[ext_resource type="PackedScene" path="res://Prefabs/Sitable/sitable_sit.tscn" id="1_q3idy"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_le7pp"]
+size = Vector3(0.33, 0.1, 0.33)
+
+[node name="SitableSitBambetel" groups=["Interactable"] instance=ExtResource("1_q3idy")]
+rotation_offset_degrees = 90.0
+
+[node name="SitableArea" parent="." index="1"]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape3D" parent="SitableArea" index="0"]
+shape = SubResource("BoxShape3D_le7pp")
+debug_color = Color(0.7880146, 0.06849865, 0.9999998, 0.41960785)
+
+[node name="OccupationRayCast" parent="." index="2"]
+enabled = false
+
+[connection signal="try_to_sit" from="SitableArea" to="." method="_on_sitable_area_try_to_sit"]

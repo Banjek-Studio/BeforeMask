@@ -1,0 +1,126 @@
+[gd_scene load_steps=16 format=3 uid="uid://bmk20wdtewfye"]
+
+[ext_resource type="PackedScene" uid="uid://2jbwdhoyqam8" path="res://Prefabs/player.tscn" id="1_cr88r"]
+[ext_resource type="PackedScene" uid="uid://dpvkhgimn6oil" path="res://Prefabs/Sitable/sit_object.tscn" id="1_dwe25"]
+[ext_resource type="PackedScene" uid="uid://bvwsq45gsgmgo" path="res://InventorySystem/Scenes/Items/flash_light.tscn" id="3_ja2gc"]
+[ext_resource type="PackedScene" uid="uid://dj5kb8t53lgci" path="res://InventorySystem/Scenes/UI.tscn" id="3_k6kwl"]
+[ext_resource type="PackedScene" uid="uid://y2lovu78m754" path="res://InventorySystem/Scenes/Items/battery.tscn" id="6_8ak3u"]
+[ext_resource type="PackedScene" uid="uid://d01qefkes7p65" path="res://Assets/Models/Battery/battery_mesh.tscn" id="8_54q24"]
+[ext_resource type="PackedScene" uid="uid://cfxgkhxgxeb0u" path="res://WagonSystem/Scenes/wagon_3.tscn" id="8_ycwcr"]
+[ext_resource type="Script" uid="uid://b1wo26bjc0xqo" path="res://Scripts/Items/Battery.gd" id="9_x6yx1"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k6kwl"]
+sky_top_color = Color(0.09239707, 0.09239706, 0.09239706, 1)
+sky_horizon_color = Color(0.07683582, 0.07683582, 0.07683582, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Sky" id="Sky_ja2gc"]
+sky_material = SubResource("ProceduralSkyMaterial_k6kwl")
+process_mode = 1
+
+[sub_resource type="Environment" id="Environment_dwe25"]
+background_mode = 2
+sky = SubResource("Sky_ja2gc")
+tonemap_mode = 3
+sdfgi_enabled = true
+glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_emission = Color(0.08468992, 0.08468992, 0.08468992, 1)
+volumetric_fog_emission_energy = 0.1
+volumetric_fog_length = 128.0
+adjustment_enabled = true
+adjustment_brightness = 1.2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k6kwl"]
+size = Vector3(16.2, 0.48, 11.205)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_cohew"]
+height = 0.09
+radius = 0.04
+
+[sub_resource type="Resource" id="Resource_1xicg"]
+script = ExtResource("9_x6yx1")
+capability = 10.0
+item_id = 2
+name = "Battery"
+description = "NyzmNyam"
+mesh_scene = ExtResource("8_54q24")
+item_collision = SubResource("CylinderShape3D_cohew")
+pickable_area_collision = SubResource("CylinderShape3D_cohew")
+item_scale = Vector3(0.04, 0.04, 0.04)
+metadata/_custom_type_script = "uid://b1wo26bjc0xqo"
+
+[sub_resource type="Resource" id="Resource_3o4w6"]
+script = ExtResource("9_x6yx1")
+capability = 40.0
+item_id = 2
+name = "Battery"
+description = "NyzmNyam"
+mesh_scene = ExtResource("8_54q24")
+item_collision = SubResource("CylinderShape3D_cohew")
+pickable_area_collision = SubResource("CylinderShape3D_cohew")
+item_scale = Vector3(0.04, 0.04, 0.04)
+metadata/_custom_type_script = "uid://b1wo26bjc0xqo"
+
+[node name="TEST2" type="Node3D"]
+
+[node name="SitObject" parent="." instance=ExtResource("1_dwe25")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0378366, -0.30585074, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_dwe25")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8045224, 0.30682594, -3.800542)
+
+[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2221394, 0)
+shape = SubResource("BoxShape3D_k6kwl")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7239404, 0.7143028, 7.7399006)
+use_collision = true
+size = Vector3(5.2227783, 0.40967968, 6.6498413)
+
+[node name="Player" parent="." node_paths=PackedStringArray("player_inventory") instance=ExtResource("1_cr88r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5202174, -0.352301, -5.868167)
+player_inventory = NodePath("../Inventory_UI")
+slow_walk_speed = 4.0
+jump_acceleration = 3.0
+
+[node name="Inventory_UI" parent="." instance=ExtResource("3_k6kwl")]
+
+[node name="FlashLight" parent="." groups=["Interactable"] instance=ExtResource("3_ja2gc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2096734, 1.3962171, -2.0437164)
+
+[node name="FlashLight2" parent="." groups=["Interactable"] instance=ExtResource("3_ja2gc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2096734, 1.6787729, -2.0437164)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.27034843, 0.96276253, 0, -0.96276253, 0.27034843, 0.23701859, 14.501296, -7.788295)
+light_color = Color(0.87058824, 1, 1, 1)
+light_energy = 0.1
+shadow_enabled = true
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.144184, 0.8624532, -2.3499393)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.187501, 0, -2.1116965)
+operation = 2
+radius = 0.43
+height = 16.1
+
+[node name="Baterry" parent="." instance=ExtResource("6_8ak3u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.211866, 0.5539983, -2.1786156)
+item_data = SubResource("Resource_1xicg")
+
+[node name="Baterry2" parent="." instance=ExtResource("6_8ak3u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.211866, 0.5539983, -1.8674088)
+item_data = SubResource("Resource_3o4w6")
+
+[node name="Wagon(1)" parent="." instance=ExtResource("8_ycwcr")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4.9667144, -0.2921543, -18.691942)

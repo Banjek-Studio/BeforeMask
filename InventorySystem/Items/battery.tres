@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Battery" load_steps=3 format=3 uid="uid://bijjdqmu7stlr"]
+
+[ext_resource type="Texture2D" uid="uid://h8m6qc1yg00c" path="res://Assets/Images/Icons/Battery.png" id="1_y2h3p"]
+[ext_resource type="Script" uid="uid://b1wo26bjc0xqo" path="res://Scripts/Items/Battery.gd" id="3_v0o6t"]
+
+[resource]
+script = ExtResource("3_v0o6t")
+item_id = 2
+name = "Battery"
+description = "Just a simple battery"
+icon = ExtResource("1_y2h3p")
+max_stack_size = 2
+item_scale = Vector3(0.04, 0.04, 0.04)
+metadata/_custom_type_script = "uid://b1wo26bjc0xqo"

@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="WagonPool" load_steps=7 format=3 uid="uid://bx20x5y26b1g6"]
+
+[ext_resource type="Script" uid="uid://bgixvdk2a0ndc" path="res://WagonSystem/Scripts/WagonPool.gd" id="1_3k51i"]
+[ext_resource type="Script" uid="uid://bx7b7eyinrdur" path="res://WagonSystem/Scripts/WagonEntry.gd" id="2_o5pt4"]
+[ext_resource type="Resource" uid="uid://cmpq5la1gag7k" path="res://WagonSystem/Wagons/default.tres" id="3_o5pt4"]
+[ext_resource type="Resource" uid="uid://dw0yn3iy75cfn" path="res://WagonSystem/Wagons/default_anomaly.tres" id="4_rw2u0"]
+
+[sub_resource type="Resource" id="Resource_rw2u0"]
+script = ExtResource("2_o5pt4")
+wagon_data = ExtResource("3_o5pt4")
+metadata/_custom_type_script = "uid://bx7b7eyinrdur"
+
+[sub_resource type="Resource" id="Resource_lytwq"]
+script = ExtResource("2_o5pt4")
+wagon_data = ExtResource("4_rw2u0")
+weight = 2
+metadata/_custom_type_script = "uid://bx7b7eyinrdur"
+
+[resource]
+script = ExtResource("1_3k51i")
+wagons = Array[ExtResource("2_o5pt4")]([SubResource("Resource_rw2u0"), SubResource("Resource_lytwq"), SubResource("Resource_rw2u0")])
+metadata/_custom_type_script = "uid://bgixvdk2a0ndc"

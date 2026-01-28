@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5awf4hksnmf5"]
+
+[ext_resource type="Script" uid="uid://resf2gdnpwdf" path="res://Scripts/Interaction/BaseReadableObject.gd" id="1_hm763"]
+[ext_resource type="Script" uid="uid://bpjnl3y5xqbpj" path="res://Scripts/Interaction/Readable.gd" id="2_qrbi3"]
+
+[node name="BaseReadableObject" type="RigidBody3D"]
+freeze_mode = 1
+script = ExtResource("1_hm763")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+
+[node name="Object" type="Node3D" parent="."]
+
+[node name="ReadSound" type="AudioStreamPlayer3D" parent="."]
+
+[node name="ReadArea" type="Area3D" parent="." groups=["Interactable"]]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("2_qrbi3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ReadArea"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[connection signal="item_read" from="ReadArea" to="." method="_on_read_area_item_read"]
+[connection signal="animation_finished" from="AnimationPlayer" to="ReadArea" method="_on_animation_player_animation_finished"]

@@ -1,0 +1,51 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=11 format=3 uid="uid://coetfesqwvlj1"]
+
+[ext_resource type="Script" uid="uid://d3x6i0vqivw38" path="res://DialogueSystem/Scripts/DialogueChoise.gd" id="1_ohbfo"]
+[ext_resource type="Script" uid="uid://dqg3a37cdmtgr" path="res://DialogueSystem/Scripts/DialogueLine.gd" id="2_k6hid"]
+[ext_resource type="Script" uid="uid://d24qojb7e13b6" path="res://DialogueSystem/Scripts/DialogueData.gd" id="3_mvib7"]
+
+[sub_resource type="Resource" id="Resource_x8mav"]
+script = ExtResource("1_ohbfo")
+choice_text = "Idi nahui"
+metadata/_custom_type_script = "uid://d3x6i0vqivw38"
+
+[sub_resource type="Resource" id="Resource_07y4a"]
+script = ExtResource("2_k6hid")
+speaker_name = "David"
+text = "OOO ne pidu nahui"
+metadata/_custom_type_script = "uid://dqg3a37cdmtgr"
+
+[sub_resource type="Resource" id="Resource_vipjb"]
+script = ExtResource("3_mvib7")
+dialogue_lines = Array[ExtResource("2_k6hid")]([SubResource("Resource_07y4a")])
+metadata/_custom_type_script = "uid://d24qojb7e13b6"
+
+[sub_resource type="Resource" id="Resource_mamcd"]
+script = ExtResource("1_ohbfo")
+choice_text = "Ne idi nahui"
+next_dialogue = SubResource("Resource_vipjb")
+metadata/_custom_type_script = "uid://d3x6i0vqivw38"
+
+[sub_resource type="Resource" id="Resource_65pw5"]
+script = ExtResource("2_k6hid")
+speaker_name = "David"
+text = "Hi, Im David"
+metadata/_custom_type_script = "uid://dqg3a37cdmtgr"
+
+[sub_resource type="Resource" id="Resource_ohbfo"]
+script = ExtResource("2_k6hid")
+speaker_name = "David"
+text = "Wanna some fun?"
+metadata/_custom_type_script = "uid://dqg3a37cdmtgr"
+
+[sub_resource type="Resource" id="Resource_k6hid"]
+script = ExtResource("2_k6hid")
+speaker_name = "David"
+text = "So what da ya think?"
+metadata/_custom_type_script = "uid://dqg3a37cdmtgr"
+
+[resource]
+script = ExtResource("3_mvib7")
+dialogue_lines = Array[ExtResource("2_k6hid")]([SubResource("Resource_65pw5"), SubResource("Resource_ohbfo"), SubResource("Resource_k6hid")])
+choices = Array[ExtResource("1_ohbfo")]([SubResource("Resource_x8mav"), SubResource("Resource_mamcd")])
+metadata/_custom_type_script = "uid://d24qojb7e13b6"

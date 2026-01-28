@@ -1,0 +1,119 @@
+[gd_scene load_steps=10 format=3 uid="uid://2jbwdhoyqam8"]
+
+[ext_resource type="Script" uid="uid://daoutep6rs5bf" path="res://Scripts/Movement.gd" id="2_2nftw"]
+[ext_resource type="Script" uid="uid://o7pdyl2xx2uc" path="res://Scripts/Interaction.gd" id="4_2nftw"]
+[ext_resource type="Script" uid="uid://bnqifk36th6s5" path="res://Scripts/Player/HeadBob.gd" id="4_knrd4"]
+[ext_resource type="AudioStream" uid="uid://dnctcwk4lo1yi" path="res://Assets/Audio/SFX/footstep_carpet_004.ogg" id="5_4qbli"]
+[ext_resource type="Script" uid="uid://b6uhe0iesqgrv" path="res://Scripts/Player/CameraController.gd" id="5_08u7w"]
+[ext_resource type="Script" uid="uid://bcnord8lain45" path="res://Scripts/Crosshair.gd" id="5_knrd4"]
+[ext_resource type="AudioStream" uid="uid://h54t6454f2vs" path="res://Resources/Player/footsteps_randomizer.tres" id="6_juxdh"]
+[ext_resource type="Script" uid="uid://jm2t14m7qfe1" path="res://Scripts/Player/FootstepController.gd" id="11_2xbkd"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_juxdh"]
+radius = 0.2
+height = 1.75
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_5wxv7"]
+radius = 0.2
+height = 1.75
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("hand_position") groups=["Player"]]
+collision_layer = 3
+script = ExtResource("2_2nftw")
+hand_position = NodePath("Head/Hand")
+speed = 3.0
+slow_walk_speed = 3.0
+crouch_speed = 2.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_juxdh")
+debug_color = Color(3.7541986e-06, 0.6028628, 0.68521947, 0.41960785)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_5wxv7")
+
+[node name="CrouchRaycasts" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+
+[node name="RayCast3D" type="RayCast3D" parent="CrouchRaycasts"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.16233122, 0.12767828, -0.12194371)
+target_position = Vector3(0, -0.6, 0)
+
+[node name="RayCast3D2" type="RayCast3D" parent="CrouchRaycasts"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.14397752, 0.12767828, -0.12194371)
+target_position = Vector3(0, -0.6, 0)
+
+[node name="RayCast3D3" type="RayCast3D" parent="CrouchRaycasts"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.14397752, -0.19224435, -0.12194371)
+target_position = Vector3(0, -0.6, 0)
+
+[node name="RayCast3D4" type="RayCast3D" parent="CrouchRaycasts"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.16233122, -0.19224435, -0.12194371)
+target_position = Vector3(0, -0.6, 0)
+
+[node name="RayCast3D5" type="RayCast3D" parent="CrouchRaycasts"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.0033605099, 0.0053191725, -0.12194371)
+target_position = Vector3(0, -0.6, 0)
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+
+[node name="InteractionRayCast" type="RayCast3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+target_position = Vector3(0, -1.2, 0)
+collision_mask = 4
+collide_with_areas = true
+script = ExtResource("4_2nftw")
+
+[node name="CameraController" type="Node3D" parent="Head" node_paths=PackedStringArray("player_body", "hand")]
+script = ExtResource("5_08u7w")
+player_body = NodePath("../..")
+hand = NodePath("../Hand")
+zoom_fov = 30.0
+normal_fov = 55.0
+sway_amount = 2.0
+sway_lerp_speed = 5.0
+
+[node name="Hand" type="Node3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23733175, -0.15576816, -0.29740122)
+
+[node name="HeadBob" type="Node3D" parent="Head"]
+script = ExtResource("4_knrd4")
+head_bob_strength = 0.02
+bob_walk_frequency = 7.0
+bob_slow_walk_frequency = 2.1
+
+[node name="Camera3D" type="Camera3D" parent="Head/HeadBob" groups=["Camera"]]
+fov = 60.0
+
+[node name="Crosshair" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("5_knrd4")
+cross_form = 1
+default_size = 2.0
+default_thickness = 2.0
+highlight_color = Color(0.8007308, 0.8007319, 0.7981509, 1)
+highlight_size = 3.0
+
+[node name="FootstepPlayer3D" type="AudioStreamPlayer3D" parent="."]
+
+[node name="FootstepController" type="Node" parent="." node_paths=PackedStringArray("player", "footstep_player")]
+script = ExtResource("11_2xbkd")
+player = NodePath("..")
+footstep_player = NodePath("../FootstepPlayer3D")
+min_step_interval = 0.3
+step_walk_frequency = 5.0
+step_slow_walk_frequency = 3.0
+step_crouch_frequency = 3.0
+volume_walk_db = 5.0
+volume_slow_walk_db = -10.0
+volume_crouch_db = -25.0
+walk_stream = ExtResource("6_juxdh")
+slow_walk_stream = ExtResource("6_juxdh")
+crouch_stream = ExtResource("6_juxdh")

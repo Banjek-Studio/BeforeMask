@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="WagonData" load_steps=3 format=3 uid="uid://dw0yn3iy75cfn"]
+
+[ext_resource type="Script" uid="uid://1s2yjfgmlga2" path="res://WagonSystem/Scripts/WagonData.gd" id="1_okl1s"]
+[ext_resource type="PackedScene" uid="uid://c3bifci583j3i" path="res://WagonSystem/Scenes/wagon.tscn" id="2_dny6n"]
+
+[resource]
+script = ExtResource("1_okl1s")
+wagon_scene = ExtResource("2_dny6n")
+has_anomaly = true
+metadata/_custom_type_script = "uid://1s2yjfgmlga2"

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="WagonData" load_steps=3 format=3 uid="uid://nydnt5gfx03o"]
+
+[ext_resource type="Script" uid="uid://1s2yjfgmlga2" path="res://WagonSystem/Scripts/WagonData.gd" id="1_hgn66"]
+[ext_resource type="PackedScene" uid="uid://bnaxlrr04fam5" path="res://WagonSystem/Scenes/wagon_dark.tscn" id="2_hgn66"]
+
+[resource]
+script = ExtResource("1_hgn66")
+wagon_name = "Face Wagon"
+wagon_scene = ExtResource("2_hgn66")
+has_anomaly = true
+anomaly = 8
+metadata/_custom_type_script = "uid://1s2yjfgmlga2"

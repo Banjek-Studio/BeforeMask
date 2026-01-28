@@ -1,0 +1,103 @@
+[gd_scene load_steps=10 format=3 uid="uid://bk0iduu8kam5t"]
+
+[ext_resource type="PackedScene" uid="uid://dsxijgohhkdnw" path="res://Prefabs/Interaction/BaseToggleableObject.tscn" id="1_oias1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oias1"]
+size = Vector3(0.2, 0.2, 0.03046875)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8me16"]
+size = Vector3(0.2, 0.2, 0.03)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_64gn5"]
+top_radius = 0.012
+bottom_radius = 0.012
+height = 0.08
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nu23i"]
+size = Vector3(0.025, 0.1, 0.025)
+
+[sub_resource type="Animation" id="Animation_oias1"]
+resource_name = "toggle_on"
+length = 0.2
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Object/Node3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.2, 1, 0.7660444, 0, 0, 0.64278764)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ToggleArea")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.2, 1, 0.7460574, 0, 0, 0.66588163)
+
+[sub_resource type="Animation" id="Animation_8me16"]
+resource_name = "toggle_off"
+length = 0.2
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Object/Node3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.7660444, 0, 0, 0.64278764, 0.2, 1, 0, 0, 0, 1)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ToggleArea")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.7460574, 0, 0, 0.66588163, 0.2, 1, 0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_64gn5"]
+length = 0.001
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Object/Node3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ToggleArea")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nu23i"]
+_data = {
+&"RESET": SubResource("Animation_64gn5"),
+&"toggle_off": SubResource("Animation_8me16"),
+&"toggle_on": SubResource("Animation_oias1")
+}
+
+[node name="Switch" instance=ExtResource("1_oias1")]
+
+[node name="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.00039062276)
+shape = SubResource("BoxShape3D_oias1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Object" index="0"]
+mesh = SubResource("BoxMesh_8me16")
+
+[node name="Node3D" type="Node3D" parent="Object" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0037371488, 0.0024213148)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Object/Node3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, -0.5, 0, 0.5, 0.8660254, 0, 0.028889317, 0.022165172)
+mesh = SubResource("CylinderMesh_64gn5")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" parent="ToggleArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.86602545, -0.5, 0, 0.5, 0.86602545, -7.450581e-09, 0.026078299, 0.022227542)
+shape = SubResource("BoxShape3D_nu23i")
+
+[node name="AnimationPlayer" parent="." index="4"]
+libraries = {
+&"": SubResource("AnimationLibrary_nu23i")
+}

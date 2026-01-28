@@ -1,0 +1,21 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://ro8da0xv6fev"]
+
+[ext_resource type="Texture2D" uid="uid://c7avcta6kcogn" path="res://Assets/Materials/Glass/Texturelabs_Glass_135L.jpg" id="1_cn3rl"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ur4ft"]
+resource_local_to_scene = true
+noise_type = 4
+offset = Vector3(227.28, 86.25, 0)
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ioppm"]
+width = 128
+height = 128
+noise = SubResource("FastNoiseLite_ur4ft")
+
+[resource]
+albedo_texture = ExtResource("1_cn3rl")
+roughness = 0.1
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_ioppm")
+refraction_enabled = true

@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://btog13mv7uxgk"]
+
+[ext_resource type="PackedScene" uid="uid://ccpefst1jhtxy" path="res://AnomalySystem/Scenes/base_anomaly_object.tscn" id="1_l1duj"]
+[ext_resource type="Script" uid="uid://cl0nvv1783y5f" path="res://AnomalySystem/Scripts/Anomalies/PhanthonAnomaly.gd" id="2_uvcei"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l1duj"]
+transparency = 3
+alpha_hash_scale = 1.0
+alpha_antialiasing_mode = 0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_uvcei"]
+lightmap_size_hint = Vector2i(17, 14)
+
+[node name="PhantomAnomaly" node_paths=PackedStringArray("phantom_mesh") instance=ExtResource("1_l1duj")]
+script = ExtResource("2_uvcei")
+phantom_mesh = NodePath("MeshInstance3D")
+speed = 2.0
+type = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_l1duj")
+mesh = SubResource("CapsuleMesh_uvcei")

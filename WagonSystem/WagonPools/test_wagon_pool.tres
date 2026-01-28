@@ -1,0 +1,63 @@
+[gd_resource type="Resource" script_class="WagonPool" load_steps=21 format=3 uid="uid://bmviub5oge7o0"]
+
+[ext_resource type="Script" uid="uid://bgixvdk2a0ndc" path="res://WagonSystem/Scripts/WagonPool.gd" id="1_v5a8x"]
+[ext_resource type="Script" uid="uid://bx7b7eyinrdur" path="res://WagonSystem/Scripts/WagonEntry.gd" id="2_j8e0v"]
+[ext_resource type="Resource" uid="uid://cyigdxrb0pepa" path="res://WagonSystem/Wagons/bad_door_anomaly.tres" id="3_sacwe"]
+[ext_resource type="Resource" uid="uid://dw0yn3iy75cfn" path="res://WagonSystem/Wagons/default_anomaly.tres" id="4_73lmw"]
+[ext_resource type="Resource" uid="uid://bdg0qqbwv8sm3" path="res://WagonSystem/Wagons/dark_anomaly.tres" id="5_b66iw"]
+[ext_resource type="Resource" uid="uid://nydnt5gfx03o" path="res://WagonSystem/Wagons/face_anomaly.tres" id="6_pw5cn"]
+[ext_resource type="Resource" uid="uid://csrcgdp1evkjn" path="res://WagonSystem/Wagons/phantom_anomaly.tres" id="7_m5w4m"]
+[ext_resource type="Resource" uid="uid://bgugbre1nrjrm" path="res://WagonSystem/Wagons/sleep_anomaly.tres" id="8_f537h"]
+[ext_resource type="Resource" uid="uid://cvttca56w01x4" path="res://WagonSystem/Wagons/trap_anomaly.tres" id="9_sakgv"]
+[ext_resource type="Resource" uid="uid://haqhc04gx8sw" path="res://WagonSystem/Wagons/conductor_anomaly.tres" id="10_pw5cn"]
+[ext_resource type="Resource" uid="uid://lflrn1b1d4j8" path="res://WagonSystem/Wagons/turbo_anomaly.tres" id="11_m5w4m"]
+
+[sub_resource type="Resource" id="Resource_rw2u0"]
+script = ExtResource("2_j8e0v")
+wagon_data = ExtResource("3_sacwe")
+metadata/_custom_type_script = "uid://bx7b7eyinrdur"
+
+[sub_resource type="Resource" id="Resource_lytwq"]
+script = ExtResource("2_j8e0v")
+wagon_data = ExtResource("4_73lmw")
+metadata/_custom_type_script = "uid://bx7b7eyinrdur"
+
+[sub_resource type="Resource" id="Resource_3q1gh"]
+script = ExtResource("2_j8e0v")
+wagon_data = ExtResource("5_b66iw")
+metadata/_custom_type_script = "uid://bx7b7eyinrdur"
+
+[sub_resource type="Resource" id="Resource_0qjul"]
+script = ExtResource("2_j8e0v")
+wagon_data = ExtResource("6_pw5cn")
+metadata/_custom_type_script = "uid://bx7b7eyinrdur"
+
+[sub_resource type="Resource" id="Resource_kjsrk"]
+script = ExtResource("2_j8e0v")
+wagon_data = ExtResource("7_m5w4m")
+metadata/_custom_type_script = "uid://bx7b7eyinrdur"
+
+[sub_resource type="Resource" id="Resource_0hwvp"]
+script = ExtResource("2_j8e0v")
+wagon_data = ExtResource("8_f537h")
+metadata/_custom_type_script = "uid://bx7b7eyinrdur"
+
+[sub_resource type="Resource" id="Resource_uix5m"]
+script = ExtResource("2_j8e0v")
+wagon_data = ExtResource("9_sakgv")
+metadata/_custom_type_script = "uid://bx7b7eyinrdur"
+
+[sub_resource type="Resource" id="Resource_f537h"]
+script = ExtResource("2_j8e0v")
+wagon_data = ExtResource("10_pw5cn")
+metadata/_custom_type_script = "uid://bx7b7eyinrdur"
+
+[sub_resource type="Resource" id="Resource_sakgv"]
+script = ExtResource("2_j8e0v")
+wagon_data = ExtResource("11_m5w4m")
+metadata/_custom_type_script = "uid://bx7b7eyinrdur"
+
+[resource]
+script = ExtResource("1_v5a8x")
+wagons = Array[ExtResource("2_j8e0v")]([SubResource("Resource_rw2u0"), SubResource("Resource_lytwq"), SubResource("Resource_rw2u0"), SubResource("Resource_3q1gh"), SubResource("Resource_0qjul"), SubResource("Resource_kjsrk"), SubResource("Resource_0hwvp"), SubResource("Resource_uix5m"), SubResource("Resource_f537h"), SubResource("Resource_sakgv")])
+metadata/_custom_type_script = "uid://bgixvdk2a0ndc"

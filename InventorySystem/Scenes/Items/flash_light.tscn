@@ -1,0 +1,98 @@
+[gd_scene load_steps=16 format=3 uid="uid://bvwsq45gsgmgo"]
+
+[ext_resource type="PackedScene" uid="uid://csfk0ma0xoesw" path="res://InventorySystem/Scenes/Items/base_pickable_object.tscn" id="1_r6pjr"]
+[ext_resource type="Script" uid="uid://1yxu5n4hkq31" path="res://Scripts/Items/FlashlightItem.gd" id="2_nbarp"]
+[ext_resource type="Material" uid="uid://dndnyhhbp2l0p" path="res://Assets/Materials/flashlight_item.tres" id="3_1rtt2"]
+[ext_resource type="Resource" uid="uid://bijjdqmu7stlr" path="res://InventorySystem/Items/battery.tres" id="3_spbq8"]
+[ext_resource type="Resource" uid="uid://5trk4vvaw4v1" path="res://InventorySystem/Items/flashlight_item.tres" id="4_q7ouf"]
+[ext_resource type="Texture2D" uid="uid://djfimes8ai0pt" path="res://Assets/Textures/Light/internal_light_att.png" id="5_psyli"]
+[ext_resource type="AudioStream" uid="uid://b6n75bo42hqws" path="res://Assets/Audio/SFX/flashlightclick.mp3" id="6_2kgyx"]
+[ext_resource type="PackedScene" uid="uid://x38wl7xfs2mo" path="res://Assets/Models/Flashlight/flaslight_model.tscn" id="6_dii68"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x24ig"]
+size = Vector3(0.05, 0.05, 0.2)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_2kgyx"]
+material = ExtResource("3_1rtt2")
+radius = 0.02
+height = 0.2
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5lps8"]
+noise_type = 3
+seed = 25
+frequency = 0.0285
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dii68"]
+width = 128
+height = 128
+noise = SubResource("FastNoiseLite_5lps8")
+in_3d_space = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d6k68"]
+transparency = 1
+albedo_color = Color(0.07058824, 0.05490196, 0.05490196, 0.8392157)
+metallic = 0.85
+normal_enabled = true
+normal_scale = 6.39
+normal_texture = SubResource("NoiseTexture2D_dii68")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_nbarp"]
+material = SubResource("StandardMaterial3D_d6k68")
+radius = 0.022
+height = 0.22
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1rtt2"]
+size = Vector3(0.1, 0.1, 0.3)
+
+[node name="FlashLight" node_paths=PackedStringArray("spotlights") instance=ExtResource("1_r6pjr")]
+script = ExtResource("2_nbarp")
+is_on = false
+spotlights = [NodePath("SpotLight3D"), NodePath("SpotLight3D/SpotLight3D2")]
+battery = ExtResource("3_spbq8")
+drain_rate = 0.5
+flicker_threshold = 20.0
+item_data = ExtResource("4_q7ouf")
+
+[node name="CollisionShape3D" parent="." index="0"]
+shape = SubResource("BoxShape3D_x24ig")
+debug_color = Color(0.2733731, 0.56881243, 1, 0.41960785)
+
+[node name="Item" parent="." index="1"]
+transform = Transform3D(-4.371139e-09, -0.1, -4.371139e-09, 0, -4.371139e-09, 0.1, -0.1, 4.371139e-09, 1.9106854e-16, 0, 0, 0)
+
+[node name="EnergySlider" type="MeshInstance3D" parent="Item" index="0"]
+transform = Transform3D(-4.371139e-08, -1, -6.352747e-22, 1, -4.371139e-08, 8.351874e-23, 1.6703745e-22, 6.352747e-22, 1, 0.07, 1.6844659e-10, 0.15614638)
+mesh = SubResource("CapsuleMesh_2kgyx")
+
+[node name="GlassOnSlider" type="MeshInstance3D" parent="Item" index="1"]
+transform = Transform3D(-4.371139e-08, -1, -8.4703295e-22, 1, -4.371139e-08, 8.351876e-23, 1.6703745e-22, -4.2351647e-22, 1, 0.065937065, -2.2665403e-10, 0.16424818)
+mesh = SubResource("CapsuleMesh_nbarp")
+
+[node name="Sketchfab_Scene" parent="Item" index="2" instance=ExtResource("6_dii68")]
+
+[node name="CollisionShape3D" parent="PickableArea" index="0"]
+shape = SubResource("BoxShape3D_1rtt2")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1802654)
+visible = false
+light_color = Color(0.78431374, 1, 1, 1)
+light_energy = 3.0
+light_volumetric_fog_energy = 4.0
+light_projector = ExtResource("5_psyli")
+shadow_enabled = true
+spot_range = 10.0
+spot_angle = 27.433056
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="SpotLight3D" index="0"]
+light_color = Color(0.78431374, 1, 1, 1)
+light_energy = 0.2
+light_volumetric_fog_energy = 2.0
+shadow_enabled = true
+spot_range = 10.0
+spot_angle = 37.366753
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="6"]
+stream = ExtResource("6_2kgyx")
+
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]

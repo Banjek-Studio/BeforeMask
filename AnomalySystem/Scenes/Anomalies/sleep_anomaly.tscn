@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dicne7622pv0x"]
+
+[ext_resource type="PackedScene" uid="uid://ccpefst1jhtxy" path="res://AnomalySystem/Scenes/base_anomaly_object.tscn" id="1_h686n"]
+[ext_resource type="Script" uid="uid://dldyyqbs1feau" path="res://AnomalySystem/Scripts/Anomalies/SleepAnomaly.gd" id="2_r6ssj"]
+
+[node name="SleepAnomaly" instance=ExtResource("1_h686n")]
+script = ExtResource("2_r6ssj")
+effect_duration = 5.0
+type = 2

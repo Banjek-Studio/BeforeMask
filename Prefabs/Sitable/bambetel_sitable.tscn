@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://ducbtio075lj3"]
+
+[ext_resource type="PackedScene" uid="uid://dnkdtb7tnmylv" path="res://Prefabs/Sitable/base_sitable_object.tscn" id="1_votr0"]
+[ext_resource type="PackedScene" uid="uid://dlv5l4ar4b5w4" path="res://Prefabs/Sitable/bambetel.tscn" id="2_cta0a"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_votr0"]
+size = Vector3(0.40039063, 0.42157745, 1.0938721)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cta0a"]
+size = Vector3(0.06628418, 0.43411255, 1.0938721)
+
+[node name="BaseSitableObject" instance=ExtResource("1_votr0")]
+
+[node name="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15917969, -0.45614243, -0.29486084)
+shape = SubResource("BoxShape3D_votr0")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.026892483, -0.012879729, -0.29486084)
+shape = SubResource("BoxShape3D_cta0a")
+
+[node name="Bambetel_009" parent="model" index="0" instance=ExtResource("2_cta0a")]

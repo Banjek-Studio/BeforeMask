@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://sls5exxdoguw"]
+
+[ext_resource type="Script" uid="uid://cccst5quqs7jq" path="res://AnomalySystem/Scripts/Anomalies/DarknessAnomaly.gd" id="1_4q5ov"]
+
+[node name="DarknessAnomaly" type="Node3D"]
+script = ExtResource("1_4q5ov")
+type = 3

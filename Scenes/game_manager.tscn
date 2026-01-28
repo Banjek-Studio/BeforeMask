@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0cyvlqy3aj50"]
+
+[ext_resource type="Script" uid="uid://c23blrn8gkfco" path="res://Scripts/GameManager.gd" id="1_oj352"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_oj352"]
+font_size = 64
+
+[node name="GameManager" type="Node3D" node_paths=PackedStringArray("death_screen")]
+script = ExtResource("1_oj352")
+death_screen = NodePath("Control")
+
+[node name="Control" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="Control"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -34.5
+offset_top = -11.5
+offset_right = 34.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "You Died"
+label_settings = SubResource("LabelSettings_oj352")
+horizontal_alignment = 1
+vertical_alignment = 1

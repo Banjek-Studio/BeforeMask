@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="FlashLightResource" load_steps=3 format=3 uid="uid://5trk4vvaw4v1"]
+
+[ext_resource type="Texture2D" uid="uid://besnh1xxngw4h" path="res://Assets/Images/Icons/Flashlight.png" id="3_kapmf"]
+[ext_resource type="Script" uid="uid://dddpum4h37nuv" path="res://Scripts/Items/FlashlightResource.gd" id="5_1eafw"]
+
+[resource]
+script = ExtResource("5_1eafw")
+item_id = 1
+name = "Flashligh"
+description = "Produce beam of light"
+icon = ExtResource("3_kapmf")
+item_scale = Vector3(0.1, 0.1, 0.1)
+metadata/_custom_type_script = "uid://dddpum4h37nuv"

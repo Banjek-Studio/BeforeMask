@@ -1,0 +1,80 @@
+[gd_scene load_steps=7 format=3 uid="uid://2jbwdhoyqam8"]
+
+[ext_resource type="Script" uid="uid://daoutep6rs5bf" path="res://Scripts/Movement.gd" id="2_2nftw"]
+[ext_resource type="Shape3D" uid="uid://cjlt2v6lhcg4o" path="res://Resources/Environment/player.shape" id="2_y5hcb"]
+[ext_resource type="Script" uid="uid://bgnss3x5y6cq0" path="res://Scripts/Player/camera_controler.gd" id="3_knrd4"]
+[ext_resource type="Script" uid="uid://o7pdyl2xx2uc" path="res://Scripts/Interaction.gd" id="4_2nftw"]
+[ext_resource type="Script" uid="uid://bcnord8lain45" path="res://Scripts/Crosshair.gd" id="5_knrd4"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_5wxv7"]
+radius = 0.2
+height = 1.6
+
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
+script = ExtResource("2_2nftw")
+speed = 7
+mouse_sensitivity = null
+jump_acceleration = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = ExtResource("2_y5hcb")
+debug_color = Color(3.7541986e-06, 0.6028628, 0.68521947, 0.41960785)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_5wxv7")
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="CrouchRaycasts" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+
+[node name="RayCast3D" type="RayCast3D" parent="CrouchRaycasts"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.16233122, 0.12767828, -0.12194371)
+target_position = Vector3(0, -0.6, 0)
+
+[node name="RayCast3D2" type="RayCast3D" parent="CrouchRaycasts"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.14397752, 0.12767828, -0.12194371)
+target_position = Vector3(0, -0.6, 0)
+
+[node name="RayCast3D3" type="RayCast3D" parent="CrouchRaycasts"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.14397752, -0.19224435, -0.12194371)
+target_position = Vector3(0, -0.6, 0)
+
+[node name="RayCast3D4" type="RayCast3D" parent="CrouchRaycasts"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.16233122, -0.19224435, -0.12194371)
+target_position = Vector3(0, -0.6, 0)
+
+[node name="RayCast3D5" type="RayCast3D" parent="CrouchRaycasts"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.0033605099, 0.0053191725, -0.12194371)
+target_position = Vector3(0, -0.6, 0)
+
+[node name="CameraController" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+top_level = true
+script = ExtResource("3_knrd4")
+
+[node name="Camera3D" type="Camera3D" parent="CameraController"]
+fov = 60.0
+
+[node name="InteractionRayCast" type="RayCast3D" parent="CameraController"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+target_position = Vector3(0, -1.1, 0)
+collision_mask = 4
+collide_with_areas = true
+script = ExtResource("4_2nftw")
+
+[node name="Crosshair" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("5_knrd4")
+cross_form = 1
+default_size = 2.0
+default_thickness = 2.0
+highlight_color = Color(0.8007308, 0.8007319, 0.7981509, 1)
+highlight_size = 3.0
+
+[node name="CameraAnchor" type="Marker3D" parent="."]

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AnomalyData" load_steps=2 format=3 uid="uid://cg577inu0a0fq"]
+
+[ext_resource type="Script" uid="uid://caujx7p3yy15g" path="res://AnomalySystem/Scripts/AnomalyData.gd" id="1_v113e"]
+
+[resource]
+script = ExtResource("1_v113e")
+anomaly_name = "Shadow Anomaly"
+description = "Kill player"
+metadata/_custom_type_script = "uid://caujx7p3yy15g"

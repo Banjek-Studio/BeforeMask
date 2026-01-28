@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://5dhpryu3bag3"]
+
+[ext_resource type="PackedScene" uid="uid://ccpefst1jhtxy" path="res://AnomalySystem/Scenes/base_anomaly_object.tscn" id="1_sj41t"]
+[ext_resource type="Script" uid="uid://dccob0obh50lf" path="res://AnomalySystem/Scripts/Anomalies/FaceAnomaly.gd" id="2_i5o1a"]
+[ext_resource type="Texture2D" uid="uid://b6who8x5p5i1y" path="res://Assets/Images/the-fog-is-coming.jpg" id="3_htciw"]
+[ext_resource type="AudioStream" uid="uid://b6n75bo42hqws" path="res://Assets/Audio/SFX/flashlightclick.mp3" id="4_htciw"]
+
+[node name="FaceAnomaly" node_paths=PackedStringArray("face_sprite", "jumpscare_sound") instance=ExtResource("1_sj41t")]
+script = ExtResource("2_i5o1a")
+face_sprite = NodePath("Sprite3D")
+jumpscare_sound = NodePath("AudioStreamPlayer3D")
+type = 8
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+texture = ExtResource("3_htciw")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="1"]
+stream = ExtResource("4_htciw")

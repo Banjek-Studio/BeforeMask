@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://csfk0ma0xoesw"]
+
+[ext_resource type="Script" uid="uid://cko574vjfgqda" path="res://Scripts/Interaction/BasePickableObject.gd" id="1_h3poe"]
+[ext_resource type="AudioStream" uid="uid://bjlcymhanelm4" path="res://Assets/Audio/SFX/item-equip-6904.mp3" id="2_6hh6g"]
+[ext_resource type="Script" uid="uid://bumu73i57i36t" path="res://Scripts/Interaction/Pickapable.gd" id="3_6hh6g"]
+
+[sub_resource type="Animation" id="Animation_6hh6g"]
+resource_name = "picked_up"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d046e"]
+_data = {
+&"picked_up": SubResource("Animation_6hh6g")
+}
+
+[node name="BasePickableObject" type="RigidBody3D"]
+script = ExtResource("1_h3poe")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+
+[node name="Item" type="Node3D" parent="."]
+
+[node name="PickupSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_6hh6g")
+metadata/_edit_group_ = true
+
+[node name="PickableArea" type="Area3D" parent="." groups=["Interactable"]]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("3_6hh6g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickableArea"]
+debug_color = Color(0.91310316, 0.33265054, 0.5915065, 0.41960785)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_d046e")
+}
+
+[connection signal="finished" from="PickupSound" to="." method="_on_pickup_sound_finished"]
+[connection signal="item_picked_up" from="PickableArea" to="." method="_on_pickable_area_item_picked_up"]

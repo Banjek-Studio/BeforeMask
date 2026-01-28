@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ccpefst1jhtxy"]
+
+[ext_resource type="Script" uid="uid://c3omc2421neie" path="res://AnomalySystem/Scripts/BaseAnomalyObject.gd" id="1_duerl"]
+
+[node name="BaseAnomalyObject" type="Node3D"]
+script = ExtResource("1_duerl")

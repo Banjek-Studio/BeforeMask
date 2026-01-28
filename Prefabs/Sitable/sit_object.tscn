@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://dpvkhgimn6oil"]
+
+[ext_resource type="PackedScene" uid="uid://dnkdtb7tnmylv" path="res://Prefabs/Sitable/base_sitable_object.tscn" id="1_iyi83"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d3kss"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_iyi83"]
+noise_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_d3kss"]
+noise = SubResource("FastNoiseLite_iyi83")
+as_normal_map = true
+bump_strength = 24.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gl4gd"]
+albedo_color = Color(0.29803923, 0.28235295, 1, 0.43529412)
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_d3kss")
+
+[sub_resource type="BoxMesh" id="BoxMesh_gl4gd"]
+material = SubResource("StandardMaterial3D_gl4gd")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b5rtt"]
+
+[node name="SitObject" instance=ExtResource("1_iyi83")]
+
+[node name="CollisionShape3D" parent="." index="0"]
+shape = SubResource("BoxShape3D_d3kss")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="model" index="0"]
+mesh = SubResource("BoxMesh_gl4gd")
+
+[node name="SitableArea" parent="." index="3"]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape3D" parent="SitableArea" index="0"]
+shape = SubResource("BoxShape3D_b5rtt")
+debug_color = Color(0.83468914, 0.25512746, 0.7357801, 0.41960785)
+
+[node name="OccupationRayCast" parent="." index="4"]
+collision_mask = 10

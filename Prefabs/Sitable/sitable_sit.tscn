@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dk2cwpe8j520b"]
+
+[ext_resource type="Script" uid="uid://kwrnmwfulg68" path="res://Scripts/Interaction/SitableSit.gd" id="1_2m4nb"]
+[ext_resource type="AudioStream" uid="uid://bjlcymhanelm4" path="res://Assets/Audio/SFX/item-equip-6904.mp3" id="2_8oote"]
+[ext_resource type="Script" uid="uid://4j7nts3vdp8i" path="res://Scripts/Interaction/Sitable.gd" id="3_3ymbw"]
+
+[node name="SitableSit" type="Marker3D"]
+script = ExtResource("1_2m4nb")
+
+[node name="SitSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_8oote")
+metadata/_edit_group_ = true
+
+[node name="SitableArea" type="Area3D" parent="." groups=["Interactable"]]
+script = ExtResource("3_3ymbw")
+metadata/_custom_type_script = "uid://b4twa4dgo7vmn"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SitableArea"]
+debug_color = Color(0.89391565, 0.19580904, 0.99999994, 0.41960785)
+
+[node name="OccupationRayCast" type="RayCast3D" parent="."]
+target_position = Vector3(0, 1, 0)
+collision_mask = 8
+collide_with_areas = true

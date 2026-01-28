@@ -1,0 +1,48 @@
+[gd_scene load_steps=9 format=3 uid="uid://cheioc6astfmt"]
+
+[ext_resource type="PackedScene" uid="uid://c5awf4hksnmf5" path="res://Prefabs/Interaction/BaseReadableObject.tscn" id="1_753be"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2lh2y"]
+size = Vector3(0.4, 0.02, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_753be"]
+albedo_color = Color(0.37152582, 0.48136842, 0.5704548, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_q3xw2"]
+material = SubResource("StandardMaterial3D_753be")
+size = Vector3(0.4, 0.005, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i5lbo"]
+size = Vector3(0.4, 0.005, 0.2)
+
+[sub_resource type="Animation" id="Animation_oltdt"]
+resource_name = "read_down"
+
+[sub_resource type="Animation" id="Animation_0k0ju"]
+resource_name = "read_up"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g4tis"]
+_data = {
+&"read_down": SubResource("Animation_oltdt"),
+&"read_up": SubResource("Animation_0k0ju")
+}
+
+[node name="Ticket" instance=ExtResource("1_753be")]
+gravity_scale = 0.1
+
+[node name="CollisionShape3D" parent="." index="0"]
+shape = SubResource("BoxShape3D_2lh2y")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Object" index="0"]
+mesh = SubResource("BoxMesh_q3xw2")
+
+[node name="ReadArea" parent="." index="3"]
+text_content = "I am poor programmer pls help meeee!!!"
+
+[node name="CollisionShape3D" parent="ReadArea" index="0"]
+shape = SubResource("BoxShape3D_i5lbo")
+
+[node name="AnimationPlayer" parent="." index="4"]
+libraries = {
+&"": SubResource("AnimationLibrary_g4tis")
+}

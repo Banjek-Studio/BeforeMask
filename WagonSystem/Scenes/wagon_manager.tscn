@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://d0itkfchhpmyh"]
+
+[ext_resource type="Script" uid="uid://duy2v3d41j58g" path="res://WagonSystem/Scripts/WagonManager.gd" id="1_ncm6r"]
+[ext_resource type="Resource" uid="uid://bx20x5y26b1g6" path="res://WagonSystem/WagonPools/default.tres" id="2_nhsgm"]
+[ext_resource type="PackedScene" uid="uid://c3bifci583j3i" path="res://WagonSystem/Scenes/wagon.tscn" id="2_x5d3s"]
+[ext_resource type="Resource" uid="uid://cmpq5la1gag7k" path="res://WagonSystem/Wagons/default.tres" id="3_8tp6f"]
+[ext_resource type="PackedScene" uid="uid://dvr6vky15mfky" path="res://WagonSystem/Scenes/connector.tscn" id="4_hy0gr"]
+
+[node name="WagonManager" type="Node3D" node_paths=PackedStringArray("start_connector", "demo_vagon")]
+script = ExtResource("1_ncm6r")
+start_connector = NodePath("Connector")
+wagon_scene = ExtResource("2_x5d3s")
+connector_scene = ExtResource("4_hy0gr")
+initial_wagon_pool = ExtResource("2_nhsgm")
+first_anomaly_wagon = ExtResource("3_8tp6f")
+demo_vagon = NodePath("Wagon 1")
+wagon_length = 19.7
+connector_length = 1.6
+
+[node name="Wagon 1" parent="." instance=ExtResource("2_x5d3s")]
+
+[node name="Connector" parent="." instance=ExtResource("4_hy0gr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, 0)

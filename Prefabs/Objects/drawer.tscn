@@ -1,0 +1,109 @@
+[gd_scene load_steps=9 format=3 uid="uid://wmnrxncuxt10"]
+
+[ext_resource type="PackedScene" uid="uid://dxijlkmntkckj" path="res://Prefabs/Interaction/BaseOpenableObject.tscn" id="1_q4mr4"]
+[ext_resource type="AudioStream" uid="uid://bjlcymhanelm4" path="res://Assets/Audio/SFX/item-equip-6904.mp3" id="2_v3fqs"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q4mr4"]
+size = Vector3(0.9, 0.3, 0.9)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v3fqs"]
+size = Vector3(0.9, 0.3, 0.2)
+
+[sub_resource type="Animation" id="Animation_v3fqs"]
+resource_name = "open"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Object")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1, 0, 0, 0.5)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1, 0, 0, 0.5)
+tracks/2/type = "position_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("OpenArea")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1, 0, 0, 0.5)
+
+[sub_resource type="Animation" id="Animation_ch6k4"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Object")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+tracks/2/type = "position_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("OpenArea")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+
+[sub_resource type="Animation" id="Animation_unep0"]
+resource_name = "close"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Object")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0.5, 1, 1, 0, 0, 0)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0.5, 1, 1, 0, 0, 0)
+tracks/2/type = "position_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("OpenArea")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0, 0, 0.5, 1, 1, 0, 0, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n05hj"]
+_data = {
+&"RESET": SubResource("Animation_ch6k4"),
+&"close": SubResource("Animation_unep0"),
+&"open": SubResource("Animation_v3fqs")
+}
+
+[node name="Drawer" instance=ExtResource("1_q4mr4")]
+
+[node name="CollisionShape3D" parent="." index="0"]
+shape = SubResource("BoxShape3D_q4mr4")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Object" index="0"]
+size = Vector3(0.9, 0.3, 0.9)
+
+[node name="OpenSound" parent="." index="2"]
+stream = ExtResource("2_v3fqs")
+
+[node name="CollisionShape3D" parent="OpenArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.41737813)
+shape = SubResource("BoxShape3D_v3fqs")
+
+[node name="AnimationPlayer" parent="." index="4"]
+libraries = {
+&"": SubResource("AnimationLibrary_n05hj")
+}

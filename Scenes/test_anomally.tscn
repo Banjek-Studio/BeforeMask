@@ -1,0 +1,56 @@
+[gd_scene load_steps=10 format=3 uid="uid://iqhmaofgvmyy"]
+
+[ext_resource type="PackedScene" uid="uid://d0itkfchhpmyh" path="res://WagonSystem/Scenes/wagon_manager.tscn" id="1_c87wo"]
+[ext_resource type="PackedScene" uid="uid://2jbwdhoyqam8" path="res://Prefabs/player.tscn" id="2_0lous"]
+[ext_resource type="PackedScene" uid="uid://cic0ft0diq4oo" path="res://UI/Scenes/ui.tscn" id="3_ubm30"]
+[ext_resource type="PackedScene" uid="uid://dj5kb8t53lgci" path="res://InventorySystem/Scenes/UI.tscn" id="4_tyjmb"]
+[ext_resource type="Script" uid="uid://btsrm7ree22bo" path="res://DialogueSystem/Scripts/DialogueSystem.gd" id="5_v13b7"]
+[ext_resource type="PackedScene" uid="uid://bvwsq45gsgmgo" path="res://InventorySystem/Scenes/Items/flash_light.tscn" id="6_v13b7"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ubm30"]
+sky_top_color = Color(0.21800351, 0.26721764, 0.33278427, 1)
+sky_horizon_color = Color(0.29704306, 0.30745345, 0.32212228, 1)
+ground_bottom_color = Color(0.027731022, 0.020158606, 0.013267187, 1)
+ground_horizon_color = Color(0.29704306, 0.30745345, 0.32212228, 1)
+energy_multiplier = 0.05
+
+[sub_resource type="Sky" id="Sky_tyjmb"]
+sky_material = SubResource("ProceduralSkyMaterial_ubm30")
+
+[sub_resource type="Environment" id="Environment_v13b7"]
+background_mode = 2
+sky = SubResource("Sky_tyjmb")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="TestAnomally" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+light_color = Color(0.7294118, 1, 1, 1)
+light_energy = 0.05
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_v13b7")
+
+[node name="WagonManager" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_c87wo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.50317, 0, 0)
+player = NodePath("../Player")
+
+[node name="Player" parent="." node_paths=PackedStringArray("player_inventory") instance=ExtResource("2_0lous")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.282842, 0.36116648, 0)
+player_inventory = NodePath("../Inventory_UI")
+
+[node name="UI" parent="." instance=ExtResource("3_ubm30")]
+
+[node name="Inventory_UI" parent="." instance=ExtResource("4_tyjmb")]
+
+[node name="DialogueSystem" type="Node" parent="." groups=["DialogueSystem"]]
+script = ExtResource("5_v13b7")
+metadata/_custom_type_script = "uid://btsrm7ree22bo"
+
+[node name="FlashLight" parent="." instance=ExtResource("6_v13b7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.10425, 2.837327, 0.86484563)
+
+[editable path="WagonManager"]

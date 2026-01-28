@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://b6gueyg23sjhw"]
+
+[ext_resource type="PackedScene" uid="uid://ccpefst1jhtxy" path="res://AnomalySystem/Scenes/base_anomaly_object.tscn" id="1_yu2vr"]
+[ext_resource type="Script" uid="uid://j1xnlxgq1ql0" path="res://AnomalySystem/Scripts/Anomalies/TrapAnomaly.gd" id="2_jdcsr"]
+
+[node name="TrapAnomaly" instance=ExtResource("1_yu2vr")]
+script = ExtResource("2_jdcsr")
+type = 4

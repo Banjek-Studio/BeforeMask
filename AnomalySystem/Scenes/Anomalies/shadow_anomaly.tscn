@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://ce1rig1o45c2t"]
+
+[ext_resource type="PackedScene" uid="uid://ccpefst1jhtxy" path="res://AnomalySystem/Scenes/base_anomaly_object.tscn" id="1_kdubo"]
+[ext_resource type="Script" uid="uid://cja2bkboklb3v" path="res://AnomalySystem/Scripts/Anomalies/ShadowAnomaly.gd" id="2_xleki"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cw7ci"]
+size = Vector3(4.635132, 2.6079712, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kdubo"]
+albedo_color = Color(0.06879827, 0.06879828, 0.06879828, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xleki"]
+size = Vector3(10, 5, 30)
+
+[node name="ShadowAnomaly" node_paths=PackedStringArray("shadow_object") instance=ExtResource("1_kdubo")]
+script = ExtResource("2_xleki")
+activation_delay = 15.0
+shadow_object = NodePath("Area3D")
+speed = 1.0
+
+[node name="Area3D" type="Area3D" parent="." index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.27142334, 0.8039856, 0)
+shape = SubResource("BoxShape3D_cw7ci")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D" index="1"]
+material_override = SubResource("StandardMaterial3D_kdubo")
+transparency = 0.43
+mesh = SubResource("BoxMesh_xleki")
+skeleton = NodePath("../..")

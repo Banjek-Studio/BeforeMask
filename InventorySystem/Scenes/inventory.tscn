@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dodkwol2lcx0"]
+
+[ext_resource type="Script" uid="uid://c1dx8ejkbupps" path="res://InventorySystem/Scripts/Inventory.gd" id="1_xp5ed"]
+
+[node name="Inventory" type="Node"]
+script = ExtResource("1_xp5ed")
+metadata/_custom_type_script = "uid://c1dx8ejkbupps"
