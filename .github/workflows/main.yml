@@ -1,0 +1,31 @@
+name: "Main Modular Pipeline"
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions: write-all
+
+jobs:
+  # 1. EXPORT
+  call-export:
+    uses: ./.github/workflows/job_export.yml
+    secrets: inherit
+
+  # 2. RELEASE
+  call-release:
+    needs: call-export
+    uses: ./.github/workflows/job_release.yml
+    with:
+      version: ${{ needs.call-export.outputs.version }}
+    secrets: inherit
+
+  # 3. ITCH.IO DEPLOY
+  call-itch:
+    needs: [call-export, call-release]
+    uses: ./.github/workflows/job_itch.yml
+    with:
+      version: ${{ needs.call-export.outputs.version }}
+    secrets: inherit
