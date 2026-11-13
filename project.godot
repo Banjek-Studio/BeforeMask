@@ -15,6 +15,8 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="BeforeMask"
+config/description="I develop"
+config/version="0.0.1"
 run/main_scene="uid://bgjn4ikkkwydd"
 config/features=PackedStringArray("4.6", "Forward Plus")
 run/max_fps=60
