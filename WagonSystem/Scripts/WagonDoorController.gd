@@ -23,14 +23,14 @@ func request_interaction(_player: Player) -> void:
 	
 	is_animating = true
 	
-	# Визначаємо, яку анімацію програти
+	# Determine which animation to play
 	if state == DoorState.OPEN:
 		close_door()
 	elif state == DoorState.CLOSED:
 		unlock_and_open()
 
-# --- ЗМІНА ---
-# Тепер ці функції також викликають анімацію
+# --- CHANGE ---
+# Now these functions also trigger animation
 func unlock_and_open() -> void:
 	if state == DoorState.LOCKED or state == DoorState.CLOSED:
 		_play_animation("open")
@@ -40,7 +40,7 @@ func unlock() -> void:
 	if state == DoorState.LOCKED:
 		state = DoorState.CLOSED
 
-# --- НОВА ФУНКЦІЯ ---
+# --- NEW FUNCTION ---
 func close_door() -> void:
 	if state == DoorState.OPEN:
 		_play_animation("close")

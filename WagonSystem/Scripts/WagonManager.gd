@@ -13,13 +13,13 @@ signal game_won
 @export var connector_scene: PackedScene 
 
 @export_group("Generation Data")
-@export var initial_wagon_pool: WagonPool # Пул для звичайних вагонів
-@export var first_anomaly_wagon: WagonData # Вагон, що гарантовано з'явиться першим
+@export var initial_wagon_pool: WagonPool # Pool for normal wagons
+@export var first_anomaly_wagon: WagonData # Wagon guaranteed to appear first
 @export var demo_vagons: Array[Wagon]
 @export var reserved_wagons: Dictionary = {}
 
 @export_group("Game Rules")
-@export var wagons_to_spawn: int = 4 # Кількість активних вагонів у світі
+@export var wagons_to_spawn: int = 4 # Number of active wagons in the world
 @export var score_to_win: int = 10
 @export var wagon_length: float = 25.0
 @export var connector_length: float = 3.0
@@ -45,7 +45,7 @@ var is_game_started: bool = false
 
 func _ready() -> void:
 	if not player or not start_connector:
-		push_error("Player або Start Connector не призначені в TrainManager!")
+		push_error("Player or Start Connector not assigned in WagonManager!")
 		return
 	
 	start_connector.player_entered.connect(_on_game_start_triggered, CONNECT_ONE_SHOT)
@@ -89,7 +89,7 @@ func _initialize_train() -> void:
 		var wagon_num = i + 1
 		var new_nodes = _spawn_section(wagon_num, last_connector, true)
 		
-		# Зв'язуємо нові вузли з попередніми
+		# Link new nodes with previous ones
 		new_nodes.wagon.entry_connector = last_connector
 		last_connector.set_wagon_after(new_nodes.wagon)
 		
@@ -102,20 +102,20 @@ func _initialize_train() -> void:
 	_enter_state(GameState.IN_CONNECTOR)
 
 func _update_world_around_player() -> void:
-	# 1. Оновлення (пере-створення) вагонів біля гравця
+	# 1. Update (re-create) wagons around the player
 	reset_all_wagon_doors()
 	_reroll_adjacent_wagons(player_current_connector)
 	
-	# 2. Перевірка, чи потрібно зміщувати "вікно" активних вагонів
+	# 2. Check if the active wagon "window" needs to be shifted
 	var player_connector_index = connector_instances.find(player_current_connector)
 	if player_connector_index == -1:
-		push_error("Поточний конектор гравця не знайдено в масиві!")
+		push_error("Current player connector not found in array!")
 		return
 	
 	var forward_spawn_threshold = wagons_to_spawn - 2
 	var backward_spawn_threshold = 2
 	
-	# --- ЛОГІКА РУХУ ВПЕРЕД ---
+	# --- FORWARD MOVEMENT LOGIC ---
 	if player_connector_index >= forward_spawn_threshold:
 		var connector_to_remove = connector_instances.pop_front()
 		var wagon_to_remove = wagon_instances.pop_front()
@@ -133,7 +133,7 @@ func _update_world_around_player() -> void:
 		wagon_instances.append(new_nodes.wagon)
 		connector_instances.append(new_nodes.connector)
 
-	# --- ЛОГІКА РУХУ НАЗАД ---
+	# --- BACKWARD MOVEMENT LOGIC ---
 	elif player_connector_index <= backward_spawn_threshold and player_current_connector != start_connector:
 		var connector_to_remove = connector_instances.pop_back()
 		var wagon_to_remove = wagon_instances.pop_back()
@@ -155,28 +155,28 @@ func _update_world_around_player() -> void:
 func _spawn_section(number: int, anchor_connector: WagonConnector, is_forward: bool) -> Dictionary:
 	var wagon_data = _get_wagon_data_for_number(number)
 	if not wagon_data or not wagon_data.wagon_scene:
-		push_error("Не вдалося отримати WagonData або сцена вагона порожня для номера %d" % number)
+		push_error("Failed to get WagonData or wagon scene is empty for number %d" % number)
 		return {}
 
-	# Розрахунок позицій відносно "якоря"
+	# Calculate positions relative to "anchor"
 	var direction = Vector3.RIGHT if is_forward else Vector3.LEFT
 	var wagon_pos = anchor_connector.global_position + direction * (connector_length / 2 + wagon_length / 2)
 	var connector_pos = anchor_connector.global_position + direction * (connector_length + wagon_length)
 
-	# --- Створюємо вагон ---
+	# --- Create Wagon ---
 	var new_wagon: Wagon = wagon_data.wagon_scene.instantiate()
 	new_wagon.name = "Wagon_%d" % number
 	add_child(new_wagon)
 	new_wagon.global_position = wagon_pos
 	new_wagon.setup(number, wagon_data)
 
-	# --- Створюємо конектор ---
+	# --- Create Connector ---
 	var new_connector: WagonConnector = connector_scene.instantiate()
 	new_connector.name = "Connector_%d" % number
 	add_child(new_connector)
 	new_connector.global_position = connector_pos
 	
-	# --- Зв'язуємо їх логічно ---
+	# --- Link them logically ---
 	new_wagon.exit_connector = new_connector
 	new_connector.set_wagon_before(new_wagon)
 	new_connector.player_entered.connect(_on_player_entered_connector)
@@ -211,16 +211,16 @@ func _on_player_entered_connector(connector: WagonConnector) -> void:
 			self.score += 1
 			print("Current score: ", self.score)
 			if connector == wagon_being_attempted.exit_connector:
-				# Рухався вперед: увійшов через entry, вийшов через exit. Блокуємо entry.
+				# Moved forward: entered through entry, exited through exit. Block entry.
 				wagon_being_attempted.close_doors_without_locking()
 			else:
-				# Рухався назад: увійшов через exit, вийшов через entry. Блокуємо exit.
+				# Moved backward: entered through exit, exited through entry. Block exit.
 				wagon_being_attempted.close_doors_without_locking()
 		else:
 			print("Player retreated from wagon #%d" % wagon_being_attempted.wagon_number)
 			if is_instance_valid(wagon_being_attempted):
 				wagon_being_attempted.unlock_doors()
-		# Скидаємо відстеження
+		# Reset tracking
 		wagon_being_attempted = null
 		connector_of_origin = null
 	else:

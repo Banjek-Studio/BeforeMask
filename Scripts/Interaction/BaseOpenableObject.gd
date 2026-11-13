@@ -9,7 +9,7 @@ func _play_open_sound():
 
 func _play_animation(anim_name: String) -> void:
 	if animation_player and animation_player.has_animation(anim_name):
-		# Перевіряємо, щоб не запускати ту саму анімацію, що вже грає
+		# Check to not play the same animation that is already playing
 		if not animation_player.is_playing() or animation_player.current_animation != anim_name:
 			animation_player.play(anim_name)
 	else:

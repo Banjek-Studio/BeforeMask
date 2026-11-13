@@ -49,7 +49,7 @@ func _apply_anomaly() -> void:
 			if child is BaseAnomalyObject and child.type == target_type:
 				child.activate()
 				print("Wagon %d is %s anomaly." % [wagon_number, WagonData.AnomalyType.keys()[target_type]])
-				return # Виходимо, оскільки знайшли те, що шукали
+				return # Exit as we found what we were looking for
 		push_warning("Wagon #%d wanted anomaly '%s', but no matching object was found in anomalies_root." % [wagon_number, WagonData.AnomalyType.keys()[target_type]])
 	else:
 		print("Wagon %d is normal." % wagon_number)
@@ -60,7 +60,7 @@ func close_doors_without_locking() -> void:
 	if entry_tambour_door: entry_tambour_door.close_door()
 	if exit_tambour_door: exit_tambour_door.close_door()
 
-# Блокує шлях, з якого гравець щойно прийшов (вихідний тамбур)
+# Blocks the path the player just came from (exit tambour)
 func lock_exit_path() -> void:
 	if exit_tambour_door:
 		exit_tambour_door.close_and_lock()

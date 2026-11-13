@@ -16,7 +16,7 @@ func set_held(value: bool) -> void:
 	is_held = value
 	
 	if is_held:
-		freeze = true # зупиняє фізику, але не скрипт
+		freeze = true # stops physics but not the script
 		for child in get_children():
 			if child is CollisionShape3D:
 				child.disabled = true

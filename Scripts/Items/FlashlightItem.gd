@@ -36,8 +36,8 @@ func _process(delta: float) -> void:
 
 func drain_battery(multiplier: float):
 	if is_on and battery:
-		# Миттєво віднімаємо кількість заряду, еквівалентну 1 секунді роботи,
-		# помноженій на мультиплікатор.
+		# Instantly subtract charge amount equivalent to 1 second of operation,
+		# multiplied by the multiplier.
 		var drain_amount = drain_rate * multiplier
 		battery.capability = max(0, battery.capability - drain_amount)
 		print("Flashlight battery drained by a burst. Remaining: %f" % battery.capability)

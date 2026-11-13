@@ -24,20 +24,20 @@ signal object_opened()
 var player: Player
 
 var is_playing : bool = false
-var last_open_direction := ""  # "forward" або "backward
+var last_open_direction := ""  # "forward" or "backward
 
 func _ready() -> void:
 	var players = get_tree().get_nodes_in_group("Player")
 	if players.size() > 0:
 		player = players[0]
 	
-	# Налаштовуємо аніматор, якщо він не вказаний вручну
+	# Setup animator if not manually assigned
 	if anim_player_override:
 		anim_player = anim_player_override
 	if not anim_player:
 		anim_player = get_node_or_null("AnimationPlayer")
 
-# --- ГОЛОВНА ЗМІНА ТУТ ---
+# --- MAIN CHANGE HERE ---
 func interact():
 	if door_controller:
 		door_controller.request_interaction(player)
@@ -59,14 +59,14 @@ func open():
 	if anim_player.has_animation(anim_name):
 		anim_player.play(anim_name)
 		is_playing = true
-		is_open = !is_open # Змінюємо внутрішній стан
+		is_open = !is_open # Change internal state
 		object_opened.emit()
 
 func advance_open():
 	var anim_name = open_animation if not is_open else close_animation
 	if player:
 		var to_player = (player.global_transform.origin - global_transform.origin).normalized()
-		var door_forward = $"..".global_transform.basis.z  # Напрям "вперед" дверей
+		var door_forward = $"..".global_transform.basis.z  # Door "forward" direction
 		var dot = door_forward.dot(to_player)
 		var dir = "forward" if dot > 0.0 else "backward"
 		last_open_direction = dir

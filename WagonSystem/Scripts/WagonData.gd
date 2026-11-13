@@ -18,9 +18,9 @@ enum AnomalyType {
 	Turbo,
 	Bad_Doors,
 	Face,
-	Conductor, # Провідник
-	Mirror_Glitch, # Збій дзеркального викривлення
-	Center_of_Attention, # Центр уваги
-	Cabin_Collapse, # Розвал кабіни
+	Conductor, # Conductor
+	Mirror_Glitch, # Mirror glitch
+	Center_of_Attention, # Center of attention
+	Cabin_Collapse, # Cabin collapse
 	Knocking
 }

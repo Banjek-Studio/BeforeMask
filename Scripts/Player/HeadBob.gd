@@ -18,7 +18,7 @@ var initial_position: Vector3
 func _ready() -> void:
 	player = get_parent().get_parent() as CharacterBody3D
 	if not player:
-		push_error("HeadBob: не вдалося знайти вузол гравця (Player).")
+		push_error("HeadBob: failed to find player node (Player).")
 		set_process(false)
 		return
 		

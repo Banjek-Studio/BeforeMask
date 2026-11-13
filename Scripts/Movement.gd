@@ -59,24 +59,24 @@ func _ready() -> void:
 	player_inventory.setup(inventory)
 
 func kill() -> void:
-	if not is_alive: return # Захист від повторної смерті.
+	if not is_alive: return # Protection against double death.
 	is_alive = false
 	print("Player has been killed.")
 	
-	# Вимикаємо фізику та обробку вводу, щоб гравець зупинився.
+	# Disable physics and input processing so the player stops.
 	set_physics_process(false)
 	set_process_input(false)
 	velocity = Vector3.ZERO
 	
-	# Посилаємо сигнал, що гравець помер. GameManager його зловить.
+	# Emit signal that player died. GameManager will catch it.
 	died.emit()
-	# Тут можна додати звук смерті або анімацію падіння.
+	# Here you can add death sound or falling animation.
 
 func respawn(spawn_transform: Transform3D):
 	is_alive = true
 	global_transform = spawn_transform
 	
-	# Вмикаємо фізику та ввід назад.
+	# Enable physics and input back.
 	set_physics_process(true)
 	set_process_input(true)
 	
@@ -116,10 +116,10 @@ func _on_item_unequipped(item_data: ItemData, _slot_index: int):
 
 func _destroy_held_item():
 	if is_instance_valid(current_held_item):
-		current_held_item.queue_free() # Безпечно видаляємо об'єкт зі сцени
+		current_held_item.queue_free() # Safely remove object from scene
 		if current_held_item.is_in_group("equipped_item"):
 			current_held_item.remove_from_group("equipped_item")
-	current_held_item = null # Очищуємо змінну
+	current_held_item = null # Clear variable
 
 func _input(event):
 	if !is_alive:
